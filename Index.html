@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+    .grey {
+    background-color: #00FFFF;
+    color: #00FFFF;
+    width: 20px;
+    }
+    .red {
+    background-color: #0000FF;
+    color: #0000FF;
+    width: 20px;
+    }
+    .orange {
+    background-color: #00FF00;
+    color: #00FF00;
+    width: 20px;
+    }
+    .green {
+    background-color: #008000;
+    color: #008000;
+    width: 20px;
+    }
+    .empty {
+    background-color: #5D6D7E;
+    color: #5D6D7E;
+    width: 20px;
+    }
+
+    .rotate {
+
+    padding-bottom: 25px;
+
+    font-size: xx-small;
+
+/* Safari */
+-webkit-transform: rotate(-40deg);
+
+/* Firefox */
+-moz-transform: rotate(-40deg);
+
+/* IE */
+-ms-transform: rotate(-40deg);
+
+/* Opera */
+-o-transform: rotate(-40deg);
+
+width:20px;
+overflow: visible;
+
+}
+    </style>
+  </head>
+  <body>
+  <script>
+  setTimeout(function(){ transpose(); }, 1500);
+  function transpose(){
+    var myTable = document.getElementById('myTable');
+    var newTable = document.createElement('table');
+
+    var maxColumns = 0;
+    // Find the max number of columns
+    for(var r = 0; r < myTable.rows.length; r++) {
+    if(myTable.rows[r].cells.length > maxColumns) {
+        maxColumns = myTable.rows[r].cells.length;
+        }
+    }
+
+    for(var c = 0; c < maxColumns; c++) {
+    newTable.insertRow(c);
+    for(var r = 0; r < myTable.rows.length; r++) {
+        if(myTable.rows[r].length <= c) {
+            newTable.rows[c].insertCell(r);
+            newTable.rows[c].cells[r] = '-';
+            } else {
+            newTable.rows[c].insertCell(r);
+            newTable.rows[c].cells[r].innerHTML = myTable.rows[r].cells[c].innerHTML;
+            newTable.rows[c].cells[r].setAttribute("class", myTable.rows[r].cells[c].getAttribute("class") );
+            }
+            }
+     }
+
+    document.body.appendChild(newTable);
+    document.getElementById('myTable').remove();
+    }
+    </script>
+  </body>
+</html>
